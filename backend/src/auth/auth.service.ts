@@ -30,6 +30,15 @@ export class AuthService {
   generateJwt(user: UserDocumentDto): string {
     return this.jwt.sign({ id: user.id, role: user.role });
   }
+
+  async decodeJwt(token: string): Promise<{ id: number; role: string }> {
+    const payload = await this.jwt.verifyAsync(token, {
+      secret: 'secret',
+    });
+
+    return payload;
+  }
+
   hashPassword(password: string): string {
     //its recommended to use async function for hashing password
     //but for simplicity we are using sync function

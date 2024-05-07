@@ -20,6 +20,14 @@ export class UsersService {
     return this.users.find((user) => user.email === email);
   }
 
+  findAll(): UserDocumentDto[] {
+    return this.users;
+  }
+
+  findById(id: number): UserDocumentDto | undefined {
+    return this.users.find((user) => user.id === id);
+  }
+
   create(user: SignupDto): UserDocumentDto {
     const newUser = {
       id: ++this.idCounter,

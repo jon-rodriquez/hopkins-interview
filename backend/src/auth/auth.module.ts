@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
 import { JwtModule } from '@nestjs/jwt';
 import { UsersModule } from 'src/users/users.module';
+import { AuthRoleGuard } from './auth-role.guard';
 import { AuthService } from './auth.service';
 
 @Module({
@@ -13,7 +15,14 @@ import { AuthService } from './auth.service';
       secret: 'secret',
     }),
   ],
-  providers: [AuthService],
+  providers: [
+    AuthService,
+    //globally scoped guard
+    {
+      provide: APP_GUARD,
+      useClass: AuthRoleGuard,
+    },
+  ],
   exports: [AuthService],
 })
 export class AuthModule {}

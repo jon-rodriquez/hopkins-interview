@@ -1,4 +1,6 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Role } from 'src/auth/role.enum';
+import { Roles } from 'src/auth/roles.decoractors';
 import { SignupDto } from './dtos/users.dto';
 import { UsersService } from './users.service';
 
@@ -7,8 +9,22 @@ export class UsersController {
   constructor(private usersService: UsersService) {}
 
   @Post('/add')
+  @Roles(Role.Admin)
   signupHandler(@Body() body: SignupDto) {
     console.log(body);
     return this.usersService.create(body);
+  }
+
+  @Get('/:id')
+  @Roles(Role.Admin)
+  getUser(@Param('id') id: string) {
+    return this.usersService.findById(Number(id));
+  }
+
+  @Get('/all')
+  @Roles(Role.Admin)
+  getAllUsers() {
+    console.log('get all users');
+    return this.usersService.findAll();
   }
 }
