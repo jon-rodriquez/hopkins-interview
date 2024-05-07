@@ -8,6 +8,8 @@ import { AuthService } from './auth.service';
     UsersModule,
     JwtModule.register({
       global: true,
+      //this is a secret key that will be used to sign the JWT token, its a temporary key
+      //you should use a more secure key in production
       secret: 'secret',
     }),
   ],

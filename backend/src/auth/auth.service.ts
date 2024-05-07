@@ -12,7 +12,7 @@ export class AuthService {
   login(loginForm: LoginDto): UserSecureDto {
     const user = this.usersService.findOne(loginForm.email);
 
-    if (!user && !this.comparePasswords(loginForm.password, user.password)) {
+    if (!user || !this.comparePasswords(loginForm.password, user?.password)) {
       throw new UnauthorizedException('Invalid credentials');
     }
     const token = this.generateJwt(user);

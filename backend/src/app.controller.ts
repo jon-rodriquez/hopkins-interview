@@ -8,7 +8,6 @@ export class AppController {
 
   @Post('/login')
   loginHandler(@Body() body: LoginDto) {
-    console.log(body);
     return this.authService.login(body);
   }
 }

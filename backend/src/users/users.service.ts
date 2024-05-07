@@ -10,7 +10,7 @@ export class UsersService {
     {
       id: 1,
       email: 'admin@mail.com',
-      password: 'admin',
+      password: '$2b$10$Kucek.2nu4ODzYVY7cA.9uMToas9Bpa7rVrdS16ytpHUe3BzbPwyy',
       name: 'Admin User',
       role: 'admin',
     },
