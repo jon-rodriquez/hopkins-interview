@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { UserDocumentDto, UserDto } from './dtos/user.dto';
-import { LoginDto, SignupDto } from './dtos/users.dto';
+import { SignupDto } from './dtos/users.dto';
 
 @Injectable()
 export class UsersService {
@@ -16,7 +16,7 @@ export class UsersService {
     },
   ];
 
-  findOne(email: string): UserDto | undefined {
+  findOne(email: string): UserDocumentDto | undefined {
     return this.users.find((user) => user.email === email);
   }
 

@@ -1,17 +1,42 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
+import { UserDocumentDto, UserSecureDto } from 'src/users/dtos/user.dto';
+import { LoginDto } from 'src/users/dtos/users.dto';
+import { UsersService } from 'src/users/users.service';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthService {
-  
-  login(loginForm: LoginDto): UserDto | undefined {
-    const userIndex = this.users.findIndex(
-      (user) => user.email === loginForm.email,
-    );
+  constructor(private usersService: UsersService, private jwt: JwtService) {}
 
-    if (userIndex === -1 || this.users[userIndex]?.password !== loginForm.password) {
-      throw new UnauthorizedException();
+  login(loginForm: LoginDto): UserSecureDto {
+    const user = this.usersService.findOne(loginForm.email);
+
+    if (!user && !this.comparePasswords(loginForm.password, user.password)) {
+      throw new UnauthorizedException('Invalid credentials');
     }
+    const token = this.generateJwt(user);
 
-    return user;
+    return {
+      user: {
+        email: user.email,
+        name: user.name,
+        role: user.role,
+      },
+      auth: { token },
+    };
+  }
+
+  generateJwt(user: UserDocumentDto): string {
+    return this.jwt.sign({ id: user.id, role: user.role });
+  }
+  hashPassword(password: string): string {
+    //its recommended to use async function for hashing password
+    //but for simplicity we are using sync function
+    return bcrypt.hashSync(password, bcrypt.genSaltSync());
+  }
+
+  comparePasswords(password: string, hash: string): boolean {
+    return bcrypt.compareSync(password, hash);
   }
 }

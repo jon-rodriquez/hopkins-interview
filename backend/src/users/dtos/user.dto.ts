@@ -5,10 +5,20 @@ export class UserDto {
   role: string;
 }
 
+export class UserSecureDto {
+  user: {
+    email: string;
+    name: string;
+    role: string;
+  };
+  auth: {
+    token: string;
+  };
+}
+
 export class UserDocumentDto extends UserDto {
   id: number;
   auth?: {
-    token: string;
     expires: Date | null;
   };
 }
