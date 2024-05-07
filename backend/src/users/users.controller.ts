@@ -6,12 +6,6 @@ import { UsersService } from './users.service';
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
-  @Post('/login')
-  loginHandler(@Body() body: LoginDto) {
-    console.log(body);
-    return this.usersService.login(body);
-  }
-
   @Post('/signup')
   signupHandler(@Body() body: SignupDto) {
     console.log(body);

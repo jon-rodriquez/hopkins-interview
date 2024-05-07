@@ -1,8 +1,4 @@
-import {
-  Injectable,
-  NotFoundException,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { UserDocumentDto, UserDto } from './dtos/user.dto';
 import { LoginDto, SignupDto } from './dtos/users.dto';
 
@@ -19,16 +15,6 @@ export class UsersService {
       role: 'admin',
     },
   ];
-
-  login(loginForm: LoginDto): UserDto | undefined {
-    const user = this.users.find((user) => user.email === loginForm.email);
-
-    if (user?.password !== loginForm.password) {
-      throw new UnauthorizedException();
-    }
-
-    return user;
-  }
 
   findOne(email: string): UserDto | undefined {
     return this.users.find((user) => user.email === email);

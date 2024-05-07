@@ -7,4 +7,8 @@ export class UserDto {
 
 export class UserDocumentDto extends UserDto {
   id: number;
+  auth?: {
+    token: string;
+    expires: Date | null;
+  };
 }
