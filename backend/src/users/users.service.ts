@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotAcceptableException,
+  NotFoundException,
+} from '@nestjs/common';
 import { UserDocumentDto, UserDto } from './dtos/user.dto';
 import { SignupDto } from './dtos/users.dto';
 
@@ -25,6 +29,8 @@ export class UsersService {
   }
 
   findById(id: number): UserDocumentDto | undefined {
+    if (Number.isNaN(id))
+      throw new NotAcceptableException('id is not a number');
     return this.users.find((user) => user.id === id);
   }
 
