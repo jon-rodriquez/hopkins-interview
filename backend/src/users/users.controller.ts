@@ -14,17 +14,15 @@ export class UsersController {
     console.log(body);
     return this.usersService.create(body);
   }
+  @Get('/all')
+  @Roles(Role.Admin)
+  getAllUsers() {
+    return this.usersService.findAll();
+  }
 
   @Get('/:id')
   @Roles(Role.Admin)
   getUser(@Param('id') id: string) {
     return this.usersService.findById(Number(id));
-  }
-
-  @Get('/all')
-  @Roles(Role.Admin)
-  getAllUsers() {
-    console.log('get all users');
-    return this.usersService.findAll();
   }
 }
