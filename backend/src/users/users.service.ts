@@ -5,6 +5,7 @@ import {
 } from '@nestjs/common';
 import { UserDocumentDto, UserDto } from './dtos/user.dto';
 import { SignupDto } from './dtos/users.dto';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
@@ -38,7 +39,7 @@ export class UsersService {
     const newUser = {
       id: ++this.idCounter,
       email: user.email,
-      password: user.password,
+      password: this.hashPassword(user.password),
       name: user.name,
       role: 'baseUser',
     };
@@ -56,5 +57,10 @@ export class UsersService {
       ...user,
     };
     return this.users[userIndex];
+  }
+  hashPassword(password: string): string {
+    //its recommended to use async function for hashing password
+    //but for simplicity we are using sync function
+    return bcrypt.hashSync(password, bcrypt.genSaltSync());
   }
 }

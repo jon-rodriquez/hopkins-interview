@@ -39,12 +39,6 @@ export class AuthService {
     return payload;
   }
 
-  hashPassword(password: string): string {
-    //its recommended to use async function for hashing password
-    //but for simplicity we are using sync function
-    return bcrypt.hashSync(password, bcrypt.genSaltSync());
-  }
-
   comparePasswords(password: string, hash: string): boolean {
     return bcrypt.compareSync(password, hash);
   }
