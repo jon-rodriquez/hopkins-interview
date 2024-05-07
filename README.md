@@ -19,6 +19,7 @@ or
 from the root directory run `cd frontend && npm i && npm start`
 
 ## Logging in
-to login you can use the following credentials for the admin user
+To login you can use the following credentials for the admin user
+
 email: `admin@mail.com`
 password: `admin`
