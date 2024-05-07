@@ -17,12 +17,17 @@ export class UsersController {
   @Get('/all')
   @Roles(Role.Admin)
   getAllUsers() {
-    return this.usersService.findAll();
+    return this.usersService.findAll().map((user) => {
+      delete user.password;
+      return user;
+    });
   }
 
   @Get('/:id')
   @Roles(Role.Admin)
   getUser(@Param('id') id: string) {
-    return this.usersService.findById(Number(id));
+    const user = this.usersService.findById(Number(id));
+    delete user?.password;
+    return user;
   }
 }
