@@ -47,7 +47,7 @@ or
 from the root directory run `cd frontend && npm i && npm start`
 
 ## Logging in
-To login you can use the following credentials for the admin user
+To login you can use the following credentials for the admin user. Note it is recommened to sign in to new users in an incognio window 
 
 email: `admin@mail.com`
 password: `admin`
