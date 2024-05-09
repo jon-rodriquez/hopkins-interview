@@ -57,11 +57,14 @@ export class UsersService {
     if (this.users[userIndex].role === 'admin') {
       throw new NotAcceptableException('Cannot delete admin user');
     }
-    this.update(id, { ...this.users[userIndex], isActive: false });
+    this.update(id, { isActive: false });
     return this.users[userIndex];
   }
 
-  update(id: number, user: UserDto): UserDocumentDto | undefined {
+  update(
+    id: number,
+    user: { [key: string]: any },
+  ): UserDocumentDto | undefined {
     const userIndex = this.users.findIndex((user) => user.id === id);
     if (userIndex === -1) {
       throw new NotFoundException();

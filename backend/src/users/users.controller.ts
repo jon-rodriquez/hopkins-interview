@@ -1,4 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  ValidationPipe,
+} from '@nestjs/common';
 import { Role } from 'src/auth/role.enum';
 import { Roles } from 'src/auth/roles.decoractors';
 import { SignupDto } from './dtos/users.dto';
@@ -10,17 +18,13 @@ export class UsersController {
 
   @Post('/add')
   @Roles(Role.Admin)
-  signupHandler(@Body() body: SignupDto) {
-    console.log(body);
+  signupHandler(@Body(new ValidationPipe()) body: SignupDto) {
     return this.usersService.create(body);
   }
   @Get('/all')
   @Roles(Role.Admin)
   getAllUsers() {
-    return this.usersService.findAll().map((user) => {
-      delete user.password;
-      return user;
-    });
+    return this.usersService.findAll().filter((user) => user.isActive);
   }
 
   @Get('/:id')

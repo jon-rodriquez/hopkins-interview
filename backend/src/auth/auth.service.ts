@@ -10,7 +10,7 @@ export class AuthService {
   constructor(private usersService: UsersService, private jwt: JwtService) {}
 
   login(loginForm: LoginDto): UserSecureDto {
-    const user = this.usersService.findOne(loginForm.email);
+    const user = this.usersService.findOne(loginForm?.email?.trim());
 
     if (!user || !this.comparePasswords(loginForm.password, user?.password)) {
       throw new UnauthorizedException('Invalid credentials');
