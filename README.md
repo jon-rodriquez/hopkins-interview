@@ -23,3 +23,8 @@ To login you can use the following credentials for the admin user
 
 email: `admin@mail.com`
 password: `admin`
+
+a second user is also created with the following credentials
+
+email: `base@mail.com`
+password: `admin`

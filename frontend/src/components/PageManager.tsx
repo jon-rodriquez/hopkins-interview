@@ -6,14 +6,15 @@ import { IntercomPage } from './IntercomPage'
 type PageManagerProps = {
     pageSelection: string
     user: User
+    messages: { from: string; message: string }[]
 }
 
-export const PageManager: React.FC<PageManagerProps> = ({ pageSelection, user }) => {
+export const PageManager: React.FC<PageManagerProps> = ({ pageSelection, user, messages }) => {
     let page
 
     switch (pageSelection) {
         case 'Intercom':
-            page = <IntercomPage user={user} />
+            page = <IntercomPage user={user} messages={messages}/>
             break
         case 'Users':
             page = <UsersPage />

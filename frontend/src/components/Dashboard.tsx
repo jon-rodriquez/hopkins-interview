@@ -14,6 +14,7 @@ const socket = io('', {
 export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
     const navigate = useNavigate()
     const [pageSelection, setPageSelection] = useState('Intercom') // This is a state that will be used to determine which page to render
+    const [messages, setMessages] = useState<{ from: string; message: string }[]>([]) // This is a state that will be used to store messages
 
     useEffect(() => {
         if (!user) {
@@ -27,6 +28,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
         }
         socket.on('message', (data) => {
             console.log(data)
+            setMessages((prev) => [...prev, data])
         })
 
         return () => {
@@ -41,7 +43,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
     return (
         <div>
             <Navbar user={user} setPageSelection={setPageSelection} />
-            <PageManager user={user} pageSelection={pageSelection} />
+            <PageManager user={user} pageSelection={pageSelection} messages={messages} />
         </div>
     )
 }

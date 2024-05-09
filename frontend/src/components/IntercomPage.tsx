@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react'
 import { User } from '../assets/types/user.type'
 import axios from 'axios'
+import { Message } from './Message'
 
 type IntercomPageProps = {
     user: User | undefined
+    messages: { from: string; message: string }[]
 }
 
-export const IntercomPage: React.FC<IntercomPageProps> = ({user}) => {
+export const IntercomPage: React.FC<IntercomPageProps> = ({user, messages}) => {
     const [users, setUsers] = useState<User[]>([])
     const [selectedUser, setSelectedUser] = useState<string>("All")
     const [message, setMessage] = useState<string>("")
@@ -60,7 +62,14 @@ export const IntercomPage: React.FC<IntercomPageProps> = ({user}) => {
             {user.name}
         </option>
     ))
+
+    const messageList = messages.map((message, index) => (
+        <div key={index}>
+      <Message from={message.from} message={message.message} />
+        </div>
+    ))
     return (
+    <div>
         <div className="center">
             <p> Who do you want to message?</p>
             <select onChange={(e)=> setSelectedUser(e.target.value)}>
@@ -71,5 +80,10 @@ export const IntercomPage: React.FC<IntercomPageProps> = ({user}) => {
             <textarea placeholder="Type your message here" onChange={(e)=>setMessage(e.target.value)}></textarea>
             <button onClick={()=>onSendMessage()}>Send</button>
         </div>
+        <div>
+            <h1>Messages</h1>
+            {messageList}
+        </div>
+    </div>
     )
 }
