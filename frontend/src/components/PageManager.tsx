@@ -8,7 +8,7 @@ type PageManagerProps = {
   user: User
 }
 
-export const PageManager: React.FC<PageManagerProps> = ({pageSelection, user}) => {
+export const PageManager: React.FC<PageManagerProps> = ({pageSelection}) => {
 
   let page 
 

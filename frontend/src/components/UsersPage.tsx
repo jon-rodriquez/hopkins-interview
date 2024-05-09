@@ -36,8 +36,6 @@ export const UsersPage = () => {
     } catch (error: unknown) {
       const errorMessage= error?.response?.data?.message || error?.message || 'An error occurred deleting user'
       alert(errorMessage) 
-
-        
     }
   
   }
