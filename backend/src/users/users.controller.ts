@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { Role } from 'src/auth/role.enum';
 import { Roles } from 'src/auth/roles.decoractors';
 import { SignupDto } from './dtos/users.dto';
@@ -29,5 +29,11 @@ export class UsersController {
     const user = this.usersService.findById(Number(id));
     delete user?.password;
     return user;
+  }
+
+  @Delete('/:id')
+  @Roles(Role.Admin)
+  deleteUser(@Param('id') id: string) {
+    return this.usersService.delete(Number(id));
   }
 }

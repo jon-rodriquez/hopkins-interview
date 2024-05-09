@@ -18,6 +18,7 @@ export class UsersService {
       password: '$2b$10$Kucek.2nu4ODzYVY7cA.9uMToas9Bpa7rVrdS16ytpHUe3BzbPwyy',
       name: 'Admin User',
       role: 'admin',
+      isActive: true,
     },
   ];
 
@@ -42,9 +43,22 @@ export class UsersService {
       password: this.hashPassword(user.password),
       name: user.name,
       role: 'baseUser',
+      isActive: true,
     };
     this.users.push(newUser);
     return newUser;
+  }
+
+  delete(id: number): UserDocumentDto | undefined {
+    const userIndex = this.users.findIndex((user) => user.id === id);
+    if (userIndex === -1) {
+      throw new NotFoundException();
+    }
+    if (this.users[userIndex].role === 'admin') {
+      throw new NotAcceptableException('Cannot delete admin user');
+    }
+    this.update(id, { ...this.users[userIndex], isActive: false });
+    return this.users[userIndex];
   }
 
   update(id: number, user: UserDto): UserDocumentDto | undefined {

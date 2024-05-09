@@ -3,6 +3,7 @@ export class UserDto {
   password: string;
   name: string;
   role: string;
+  isActive: boolean;
 }
 
 export class UserSecureDto {

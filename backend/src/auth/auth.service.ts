@@ -40,6 +40,8 @@ export class AuthService {
   }
 
   comparePasswords(password: string, hash: string): boolean {
+    console.log('password', password);
+    console.log('hash', hash);
     return bcrypt.compareSync(password, hash);
   }
 }
