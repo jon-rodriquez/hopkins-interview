@@ -1,6 +1,7 @@
 import React from 'react'
 import { UsersPage } from './UsersPage'
 import { User } from '../assets/types/user.type'
+import { IntercomPage } from './IntercomPage'
 
 type PageManagerProps = {
   pageSelection: string
@@ -13,10 +14,10 @@ export const PageManager: React.FC<PageManagerProps> = ({pageSelection, user}) =
 
   switch (pageSelection) {
     case 'Intercom':
-      page = <h1>Intercom Page</h1>
+      page = <IntercomPage/>
       break
     case 'Users':
-      page = <UsersPage user={user}/>
+      page = <UsersPage/>
       break
     case 'Settings':
       page = <h1>Settings Page</h1>

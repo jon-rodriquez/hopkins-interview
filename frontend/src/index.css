@@ -81,6 +81,9 @@ button:focus-visible {
     }
 }
 
+.grid {
+    display: flex;
+}
 
 .card {
     background-color: #1a1a1a;
@@ -98,4 +101,22 @@ button:focus-visible {
 .card:focus {
     outline: 4px auto -webkit-focus-ring-color;
 }
+.center {
+    display: flex;
+    place-items: center;
+    place-content: center;
+    flex-direction: column;
+}
 
+textarea {    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    padding: 0.6em 1.2em;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    background-color: #1a1a1a;
+    color: inherit;
+    transition: border-color 0.25s;
+    display: block;
+    margin: 0.6em 1.2em;
+}

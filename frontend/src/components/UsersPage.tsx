@@ -2,10 +2,12 @@ import { useEffect, useState } from 'react'
 import { User } from '../assets/types/user.type'
 import axios from 'axios'
 import deleteIcon from '../assets/MdCancel.svg'
+import { AddUser } from './AddUser'
 
 
 export const UsersPage = () => {
   const [users, setUsers] = useState<User[]>([])
+  const [addUserToggle, setAddUserToggle] = useState<boolean>(false)
 
   const getAllUsers = async () => {
     const auth = localStorage.getItem('auth')
@@ -51,7 +53,7 @@ export const UsersPage = () => {
 }, [])
 
   const userRows = users.map((user: User) => 
-      <div  className="card" key={user.id}>
+      <div className="card" key={user.id}>
         <a onClick={()=>deleteUser(user?.id)}><img src={deleteIcon} alt="delete" style={{width: "20px", height: "20px", float: "right"}}/></a>
         <p>Name: {user.name}</p>
         <p>Email: {user.email}</p>
@@ -61,8 +63,13 @@ export const UsersPage = () => {
 
    return (
     <div style={{ marginTop: "10px"}}>
-      <button> Add User +</button> 
+      <button onClick={()=> setAddUserToggle(!addUserToggle)}> Add User +</button> 
+      <AddUser show={addUserToggle} onAdd={()=> {
+      setAddUserToggle(false)
+      getAllUsers().then((data)=> {setUsers(data)})} }/>
+      <div className="grid">
       {userRows}
+      </div>
     </div>
   )
 }
