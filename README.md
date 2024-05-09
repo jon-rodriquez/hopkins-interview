@@ -56,3 +56,12 @@ a second user is also created with the following credentials
 
 email: `base@mail.com`
 password: `admin`
+
+
+<img width="936" alt="Screenshot 2024-05-09 at 12 18 40 PM" src="https://github.com/jon-rodriquez/hopkins-interview/assets/156922070/e872c81c-db2c-43e3-94fa-7275d3f0123c">
+
+
+<img width="1311" alt="Screenshot 2024-05-09 at 12 18 21 PM" src="https://github.com/jon-rodriquez/hopkins-interview/assets/156922070/d97ab69d-6eb8-498b-8fdc-6dab6a7ea879">
+
+
+
