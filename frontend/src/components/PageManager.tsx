@@ -4,34 +4,29 @@ import { User } from '../assets/types/user.type'
 import { IntercomPage } from './IntercomPage'
 
 type PageManagerProps = {
-  pageSelection: string
-  user: User
+    pageSelection: string
+    user: User
 }
 
-export const PageManager: React.FC<PageManagerProps> = ({pageSelection}) => {
+export const PageManager: React.FC<PageManagerProps> = ({ pageSelection, user }) => {
+    let page
 
-  let page 
+    switch (pageSelection) {
+        case 'Intercom':
+            page = <IntercomPage user={user} />
+            break
+        case 'Users':
+            page = <UsersPage />
+            break
+        case 'Settings':
+            page = <h1>Settings Page</h1>
+            break
+        case 'Logout':
+            page = <h1>Logout Page</h1>
+            break
+        default:
+            page = <h1>Intercom Page</h1>
+    }
 
-  switch (pageSelection) {
-    case 'Intercom':
-      page = <IntercomPage/>
-      break
-    case 'Users':
-      page = <UsersPage/>
-      break
-    case 'Settings':
-      page = <h1>Settings Page</h1>
-      break
-    case 'Logout':
-      page = <h1>Logout Page</h1>
-      break
-    default:
-      page = <h1>Intercom Page</h1>
-  }
-
-  return (
-    <div>
-      {page}    
-    </div>
-  )
+    return <div>{page}</div>
 }

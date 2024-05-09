@@ -32,7 +32,7 @@ export const Navbar: React.FC<NavbarProps> = ({ user, setPageSelection }) => {
             {
                 name: 'Logout',
                 path: '/logout',
-            }
+            },
         ],
         baseUser: [
             {
@@ -46,7 +46,11 @@ export const Navbar: React.FC<NavbarProps> = ({ user, setPageSelection }) => {
         ],
     }
     const navItems = navItemsMap[user.role].map((item) => {
-        return <a key={item.name} onClick={()=> setPageSelection(item.name)}>{item.name}</a>
+        return (
+            <a key={item.name} onClick={() => setPageSelection(item.name)}>
+                {item.name}
+            </a>
+        )
     })
 
     return <>{navItems}</>

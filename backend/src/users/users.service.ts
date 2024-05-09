@@ -9,7 +9,7 @@ import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
-  private idCounter = 1;
+  private idCounter = 2;
 
   private users: UserDocumentDto[] = [
     {
@@ -18,6 +18,14 @@ export class UsersService {
       password: '$2b$10$Kucek.2nu4ODzYVY7cA.9uMToas9Bpa7rVrdS16ytpHUe3BzbPwyy',
       name: 'Admin User',
       role: 'admin',
+      isActive: true,
+    },
+    {
+      id: 2,
+      email: 'base@mail.com',
+      password: '$2b$10$Kucek.2nu4ODzYVY7cA.9uMToas9Bpa7rVrdS16ytpHUe3BzbPwyy',
+      name: 'base User',
+      role: 'baseUser',
       isActive: true,
     },
   ];

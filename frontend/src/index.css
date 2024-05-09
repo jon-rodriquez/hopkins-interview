@@ -108,7 +108,8 @@ button:focus-visible {
     flex-direction: column;
 }
 
-textarea {    font-size: 1em;
+textarea {
+    font-size: 1em;
     font-weight: 500;
     font-family: inherit;
     padding: 0.6em 1.2em;
@@ -135,7 +136,7 @@ select {
     transition: border-color 0.25s;
     margin: 0.6em 1.2em;
 }
- option {
+option {
     font-size: 1em;
     font-weight: 500;
     font-family: inherit;
