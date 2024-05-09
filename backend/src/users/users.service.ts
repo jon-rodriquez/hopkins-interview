@@ -3,7 +3,7 @@ import {
   NotAcceptableException,
   NotFoundException,
 } from '@nestjs/common';
-import { UserDocumentDto, UserDto } from './dtos/user.dto';
+import { UserDocumentDto } from './dtos/user.dto';
 import { SignupDto } from './dtos/users.dto';
 import * as bcrypt from 'bcrypt';
 

@@ -21,11 +21,14 @@ export class SocketGateway implements OnGatewayConnection {
 
   @SubscribeMessage('LoggedIn')
   handleLoggedIn(client: Socket, data: any) {
-    console.log('LoggedIn-', data);
     client.join(data.email);
   }
 
   sendToClient(email: string, event: string, data: any) {
     this.server.to(email).emit(event, data);
+  }
+
+  sendToAll(event: string, data: any) {
+    this.server.emit(event, data);
   }
 }

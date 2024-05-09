@@ -31,7 +31,7 @@ speech.init({
     })
 }
   return (
-    <div>
+    <div className='card'>
         <p>From: {from}</p>
         <p>Message: {message}</p>
       <button onClick={()=> play("You recieved a message from " + from +"." + message)}>play</button>

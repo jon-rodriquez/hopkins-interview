@@ -7,7 +7,6 @@ export class MessageDto {
 
   @IsString()
   @IsNotEmpty()
-  @IsEmail()
   to: string;
 
   @IsString()

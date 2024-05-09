@@ -22,7 +22,7 @@ export class UsersController {
     return this.usersService.create(body);
   }
   @Get('/all')
-  @Roles(Role.Admin)
+  @Roles(Role.Admin, Role.BaseUser)
   getAllUsers() {
     return this.usersService.findAll().filter((user) => user.isActive);
   }

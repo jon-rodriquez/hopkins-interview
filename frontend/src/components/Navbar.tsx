@@ -3,7 +3,7 @@ import { User } from '../assets/types/user.type'
 
 type NavbarProps = {
     user: User
-    setPageSelection: Dispatch<SetStateAction<string>>
+    setPageSelection: (page: string) => void
 }
 type navItems = {
     name: string
@@ -26,10 +26,6 @@ export const Navbar: React.FC<NavbarProps> = ({ user, setPageSelection }) => {
                 path: '/users',
             },
             {
-                name: 'Settings',
-                path: '/settings',
-            },
-            {
                 name: 'Logout',
                 path: '/logout',
             },
@@ -40,8 +36,8 @@ export const Navbar: React.FC<NavbarProps> = ({ user, setPageSelection }) => {
                 path: '/intercom',
             },
             {
-                name: 'Settings',
-                path: '/settings',
+                name: 'Logout',
+                path: '/logout',
             },
         ],
     }

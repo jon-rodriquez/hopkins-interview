@@ -7,11 +7,12 @@ import { io } from 'socket.io-client'
 
 type DashboardProps = {
     user: User | undefined
+    setUser: React.Dispatch<React.SetStateAction<User | undefined>>
 }
 const socket = io('', {
   path: '/api/socket.io',
 })
-export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
+export const Dashboard: React.FC<DashboardProps> = ({ user, setUser }) => {
     const navigate = useNavigate()
     const [pageSelection, setPageSelection] = useState('Intercom') // This is a state that will be used to determine which page to render
     const [messages, setMessages] = useState<{ from: string; message: string }[]>([]) // This is a state that will be used to store messages
@@ -28,7 +29,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
         }
         socket.on('message', (data) => {
             console.log(data)
-            setMessages((prev) => [...prev, data])
+            setMessages((prev) => [data, ...prev])
         })
 
         return () => {
@@ -37,12 +38,23 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
         }
     }, [])
 
+    const pageSelectionHandler = (page: string) => {
+        if(page === 'Logout') {
+            localStorage.removeItem('auth')
+            navigate('/login')
+            setUser(undefined)
+        }else {
+        setPageSelection(page)
+    }
+    }
+
+
     if (!user) {
         return <></>
     }
     return (
         <div>
-            <Navbar user={user} setPageSelection={setPageSelection} />
+            <Navbar user={user} setPageSelection={pageSelectionHandler} />
             <PageManager user={user} pageSelection={pageSelection} messages={messages} />
         </div>
     )

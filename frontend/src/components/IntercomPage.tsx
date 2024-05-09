@@ -27,7 +27,7 @@ export const IntercomPage: React.FC<IntercomPageProps> = ({user, messages}) => {
     useEffect(() => {
         try {
             grabAllUsers().then((data) => {
-                setUsers(data.filter((user) => user.id != 1))
+                setUsers(data.filter((item) => item.id != user?.id))
             })
         } catch (error) {
             console.log(error)
@@ -52,6 +52,7 @@ export const IntercomPage: React.FC<IntercomPageProps> = ({user, messages}) => {
                 }
             )
             console.log(resp.data)
+            setMessage('')
         } catch (error) {
             console.log(error)
             alert('An error occurred sending message')
@@ -63,7 +64,7 @@ export const IntercomPage: React.FC<IntercomPageProps> = ({user, messages}) => {
         </option>
     ))
 
-    const messageList = messages.map((message, index) => (
+    const messageList = messages.reverse().map((message, index) => (
         <div key={index}>
       <Message from={message.from} message={message.message} />
         </div>
@@ -77,7 +78,7 @@ export const IntercomPage: React.FC<IntercomPageProps> = ({user, messages}) => {
                 {selectOptions}
             </select>
             <p>Message:</p>
-            <textarea placeholder="Type your message here" onChange={(e)=>setMessage(e.target.value)}></textarea>
+            <textarea placeholder="Type your message here" value={message} onChange={(e)=>setMessage(e.target.value)}></textarea>
             <button onClick={()=>onSendMessage()}>Send</button>
         </div>
         <div>
