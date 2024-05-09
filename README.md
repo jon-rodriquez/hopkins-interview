@@ -1,6 +1,34 @@
-# hopkins-interview
-repo that contains a site that uses nest js on the backend a framework built on top of express and node. for the frontend uses React with vite.
+# Project summary 
+This repo contains a simple site built with React and Nest js for the backend.
+The site is for demo purposes and is not complete.
 
+The Site has 2 user Types an admin and a base user. 
+ - The admin user can create, and delete users. 
+ - The base user can only view the users.
+
+The site has Telecom feature that allows users to send messages to each other.
+ - the messages are sent in real time using websockets with the socket.io library.
+ - the telecom feature has a text to voice feature that reads the messages out loud for the convienience of the user.
+
+The site has a basic authentication sysytem.
+ - JWT tokens are used to authenticate the user.
+ - the tokens are stored in the local storage of the browser.
+ - the tokens are used to authenticate the user on the backend.
+ - there is a role based system that allows the backend to check if the user is an admin or a base user. This is used to restrict access to certain routes.
+
+--- 
+
+## Technologies used
+- React
+- Nest js
+- Typescript
+- Socket.io
+- JWT
+- Vite
+- Nodejs
+- Express
+
+---
 
 ## Running the project locally
 you will need to have node installed on your machine to run the project
